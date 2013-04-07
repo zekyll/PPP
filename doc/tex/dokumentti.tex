@@ -1,0 +1,176 @@
+\documentclass[a4paper, 12pt, finnish]{article}
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{graphicx}
+
+\title{Pizzapalvelu\\
+\large{Aineopintojen harjoitustyö: Tietokantasovellus}}
+\author{T.A.}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+
+\section{Johdanto}
+\subsection*{Järjestelmän tarkoitus}
+Projektin tarkoituksena on toteuttaa pizzapalvelun (Pirkon Pizza Palvelu, PPP) tietojärjestelmä tilausten tekemistä varten sekä tilausten ja tuotteiden hallintaa varten.
+
+Palveluun liittyy yksinkertainen internet-sivusto, jonka kautta asiakkaat voivat tarkastella tuotteita ja tehdä tilauksia. Tilauksiin voi kuulua yksi tai useampi tuote, ja kutakin tuotetta voi olla useampi kappale. Pizzojen kanssa on lisäksi mahdollista valita erilaisia lisätäytteitä, jotka hinnoitellaan erikseen.
+
+Asiakas antaa tilauksen yhteydessä nimen, osoitteen, sekä puhelinnumeron tai sähköpostiosoitteen. Toimitukselle annetaan ajankohta, ja jos tilaukseen on aikaa yli tunti, sitä voidaan muokata tai se voidaan perua. Tilauksen laatimisen jälkeen on asiakkaan nähtävillä laskelma hinnoista, jotka määräytyvät toimitusajan mukaan.
+
+Palvelun hallintaa varten on oma sivustonsa, jolle ylläpitäjän tulee kirjautua. Ylläpitäjä voi lisätä tai poistaa tuotteita ja muokata niiden tietoja. Jokaisella tuotteella on nimi, kuvaus ja hinta, joka voi vaihdella eri kellonaikoina tai viikonpäivinä. Tuotteella voi lisäksi olla kuva. Tuotteet jaetaan tuoteryhmiin, joista pizzat ja lisätäytteet ovat erityisasemassa järjestelmän toiminnan kannalta.
+
+Ylläpidon kautta on nähtävissä täydelliset tiedot tilauksista. Tilaukset voidaa kirjata toimitetuiksi, jolloin niistä kirjataan toimitusaika ja toteutunut hinta (voidaan esim. antaa alennusta myöhästymisen perusteella). Tilauksesta voidaan tallentaa lisähuomioita, ja tilaukseen liittyvään osoitteeseen voidaan estää uusien tilausten tekeminen.
+
+\subsection*{Toteutus ja toimintaympäristö}
+
+Sekä pääsivusto että ylläpitosivu toteutetaan puhtaina HTML-sivuina, jotka generoidaan PHP:n avulla. Selaimilta ei vaadita tukea JavaScriptille tms. lisäominaisuuksille. Sivuja ei kuitenkaan suunnitella tai testata mitenkään vanhempia selaimia silmälläpitäen, joten on mahdollista, että toiminta vanhoilla selainversioilla on puutteellista. 
+
+Järjestelmän tietokantana käytetään PostgreSQL-tietokantaa, jota käytetään PHP:n PDO-rajapinnan kautta. SQL-komennoissa käytetään hyväksi PostgreSQL:n erityisominaisuuksia, joten järjestelmä ei sellaisenaan toimi muilla tietokannoilla. Tietokannan vaihtaminen olisi kuitenkin mahdollista suhteellisen pienellä vaivalla.
+
+\section{Käyttäjät ja yleiskuva käyttötapauksista}
+
+Käyttäjätyyppejä on kaksi: asiakas ja ylläpitäjä. Heidän näkökulmastaan järjestelmää voi luonnehtia seuraavalla käyttötapauskaaviolla:
+
+\begin{figure}[H]
+	\begin{center}
+	\caption{Käyttötapauskaavio.}
+	\includegraphics[height=6cm]{kayttotapauskaavio.png}
+	\end{center}
+\end{figure}
+
+\subsection*{Käyttäjäryhmät}
+
+\begin{description}
+\item[Asiakas]\mbox{}\\Yrityksen asiakas joka haluaa tutustua tuotevalikoimaan ja mahdollisesti tehdä tilauksen sivuston kautta.
+\item[Ylläpitäjä]\mbox{}\\Kuka tahansa yrityksen työntekijä, jolla on käyttöoikeus hallintasivustoon. Koska järjestelmä on tarkoitettu pienen yrityksen käyttöön, jossa työntekijöitä on vähän, ja he voivat toimia useassa roolissa (tuotevalikoiman ylläpitäjä, tilausten käsittelijä, tilausten toimittaja), ei roolien jaottelu tämän tarkemmin ole kovin kannattavaa.
+\end{description}
+
+\section{Käyttötapaukset}
+
+\subsection*{Asiakkaan käyttötapaukset}
+\begin{description}
+\item[Tuotteiden selaus]\mbox{}\\
+Asiakkaan on mahdollista nähdä lista kaikista tuotteista, joita on mahdollista tilata. Tuotteet ovat lajiteltuna tuoteryhmän mukaan, ja niista näytetään tuotteen nimi, lyhyt kuvaus, hinta sekä kuva, jos tuotteella on sellainen.
+\item[Tilauksen luonti]\mbox{}\\
+Asiakas voi valita pudotusvalikkojen avulla tilaukseen yhden tai useammaan tuotteen, sekä määrittää niiden lukumäärän. Pizzoille on lisäksi mahdollista valita lisätäytteitä. Asiakas syöttää järjestelmään omat tietonsa (nimi, osoite, puhelinnumero/sähköpostiosoite), toivotun toimitusajan, ja vapaamuotoiset lisätiedot. Jos jotkin annetuista tiedosta eivät ole kelvollisia, siitä näytetään virheilmoitus. Tilauksen laatimisen jälkeen järjestelmä näyttää yksityiskohtaisen hintalaskelman, jonka jälkeen asiakkaan tulee vielä hyväksyä tilaus. Tilauksesta näytetään myös sen tunnus, jonka avulla asiakas voi myöhemmin tarkastella tai muokata tilausta.
+\item[Tilauksen tarkastelu]\mbox{}\\
+Syöttämällä aikaisemman tilauksen tunnuksen asiakas voi nähdä samat tiedot jotka annettiin sen laatimisesen yhteydessä, sekä hintalaskelman. Lisäksi sivulla on linkki, jotka kautta pääsee tilauksen muokkaukseen, sekä mahdollisuus tilauksen poistoon. Nämä toiminnot ovat käytettävissä, jos toimitusajankohtaan on aikaa enemmän kuin tunti.
+\item[Tilauksen muokkaus]\mbox{}\\
+Asiakkaalle näytetään samankaltainen lomake kuin tilauksen laatimisen yhteydessä, ja sen avulla voi muokata kaikkia annettuja tietoja.
+\item[Tilauksen poisto]\mbox{}\\
+Tilauksen tarkastelunäkymässä asiakas voi valita tilauksen perumisen, jos toimitusajankohtaan on yli tunti. Tilaus poistetaan järjestelmästä, ja asiakkaalle näytetään ilmoitus poiston onnistumisesta.
+\end{description}
+
+\subsection*{Ylläpidon käyttötapaukset}
+Vaatimuksena kaikille käyttötapauksille on järjestelmään kirjautuminen.
+\begin{description}
+\item[Tuotteen lisäys]\mbox{}\\
+Ylläpitäjälle näytetään lomake, johon voi syöttää tuotteen tiedot: nimi, tuoteryhmä, hinta. Lisäksi järjestelmään voi ladata kuvatiedoston, joka näkyy asiakkaille tuotelistassa. Jos tuotetiedot ovat virheellisiä, näytetään virheilmoitus.
+\item[Tuotetietojen muokkaus]\mbox{}\\
+Ylläpitäjälle näytetään lomake, jonka kautta voidaan muokata kaikkia tuotetietoja. Lisäksi näkymässä on nappi, jolla tuotteen voi poistaa.
+\item[Tuotteen poisto]\mbox{}\\
+Poistaa tuotteen järjestelmästä niin, ettei siitä voi tehdä uusia tilauksia, eikä sitä näy enää tuotelistoissa. Tuotteet näkyvät kuitenkin edelleen aikaisemmin tehdyissä tilauksissa.
+\item[Tilausten listaus]\mbox{}\\
+Kaikista tilauksista näytetään lista, jossa kunkin tilauksen kohdalla on linkki sen tarkasteluun ja toimituksen kirjaukseen.
+\item[Tilauksen tarkastelu]\mbox{}\\
+Näytetään kaikki asiakkaan syöttämät tiedot sekä niiden perusteella tehty hintalaskelma. Lisäksi samassa näkymässä on mahdollisuus poistaa tilaus tai kirjata se toimitetuksi.
+\item[Tilauksen poisto]\mbox{}\\
+Tilauksen tarkastelunäkymässä on nappi, jolla ylläpitäjä voi poistaa tilauksen järjestelmästä.
+\item[Toimituksen kirjaus]\mbox{}\\
+Tilauksen tarkastelunäkymän ohessa on lomake, johon voi syöttää tiedot toimituksesta. Toimituksesta voidaan antaa sen toteutunut aika ja hinta; jos näitä ei anneta, järjestelmä olettaa, että ne ovat samat kuin alkuperäisissä tilaustiedoissa. Lisäksi voidaan tallentaa lisähuomioita esim. tilaukseen liittyneistä häiriöistä, ja voidaan valita asetus, joka automaattisesti estää myöhemmät tilaukset kyseisen tilauksen osoitteeseen.
+\item[Kirjautuminen]\mbox{}\\
+Käyttäjältä pyydetään käyttäjänimi ja salasana. Jos niitä vastaava käyttäjä löytyy tietokannasta, pääsee käyttäjä jatkamaan ylläpitosivulle. Muussa tapauksessa näytetään virheilmoitus.
+
+\end{description}
+
+\section{Tietosisältö}
+
+\begin{figure}[H]
+	\begin{center}
+	\caption{Tietokannan käsitekaavio}
+	\includegraphics[height=6cm]{kasitekaavio.png}
+	\end{center}
+\end{figure}
+
+\subsection*{Tuote}
+Yksittäisen tuotteen tiedot. Järjestelmässä pidetään myös valikoimasta poistettujen tuotteiden tiedot, sillä niitä käyttäviä tilauksia saattaa olla vielä voimassa. Tuotteisiin viitataan tilauksista yksikäsitteisen tuotetunnuksen avulla.
+
+
+\vspace{0.5cm}\hspace{-1cm}
+\begin{tabular}{l l p{7cm}}
+\textbf{Attribuutti} & \textbf{Tyyppi} & \textbf{Kuvaus} \\
+\hline
+Tunnus & Kokonaisluku & Yksikäsitteinen tuotetunnus. \\
+Nimi & Merkkijono & Tuotteen nimi. \\
+Tuoteryhmä & Merkkijono & Tuoteryhmä, johon tuote kuuluu. \\
+Hinta & Desimaaliluku & Tuotteen yksikköhinta. \\
+Kuvaus & Merkkijono & Optionaalinen kuvaus tuotteesta. \\
+Kuvatiedosto & Merkkijono & Mahdollisen kuvatiedoston nimi. \\
+Poistettu & Totuusarvo & Kertoo, onko tuote poistettu valikoimasta, jolloin siitä ei voi luoda uusia tilauksia. \\
+\end{tabular}
+
+\subsection*{Tilaus}
+Asiakkaan antamat tiedot tilauksesta, sekä toimituksen yhteydessä kirjattavat tiedot.
+
+\vspace{0.5cm}\hspace{-1cm}
+\begin{tabular}{l l p{7cm}}
+\textbf{Attribuutti} & \textbf{Tyyppi} & \textbf{Kuvaus} \\
+\hline
+Tunnus & Merkkijono & Yksikäsitteinen merkkijono, jonka järjestelmä generoi satunnaisesti kirjaimista A-Z ja numeroista 0-9. Esim. A45AG2U43B.  \\ 
+Hinta & Desimaaliluku & Tilauksen kokonaishinta, laskettuna toimitusajankohtana voimassa olevista hinnoista. \\
+Osoite & Merkkijono & Toimitusosoite. \\
+Yhteystieto & Merkkijono & Asiakkaan syöttämä puhelinnumero, sähköpostiosoite tms. \\
+Toimitusajankohta & Pvm + aika & Asiakkaan haluama toimitusajankohta. \\
+Lisätiedot & Merkkijono & Asiakkaan antamat mahdollisest lisätiedot tilauksesta. \\
+Vahvistettu & Totuusarvo & Kertoo, onko asiakas vahvistanut tilauksen. \\
+Toteutunut toimitusaika & Pvm + aika & Toteutunut toimitusajankohta. Syötetään toimituksen kirjauksen yhteydessä. \\
+Toteutunut hinta & Desimaaliluku & Lopullinen hinta, joka voi sisältää esim. alennukset myöhästymisestä. \\
+Huomautukset & Merkkijono & Toimituksen kirjauksenen yhteydessä annettavat kommentit mahdollisista häiriöistä tms. \\
+Tilausten esto & Totuusarvo & Uusien tilausten esto ko. tilauksen osoitteeseen. \\
+\end{tabular}
+
+\subsection*{Tilauskohde}
+Tilauskohde on yksi tilauksen osa. Se määriittää jonkin tuotteen ja sen lukumäärän, ja lisäksi kuhunkin kohteeseen voi mielivaltainen määrä lisukkeita.
+
+\vspace{0.5cm}\hspace{-1cm}
+\begin{tabular}{l l p{7cm}}
+\textbf{Attribuutti} & \textbf{Tyyppi} & \textbf{Kuvaus} \\
+\hline
+Tunnus & Kokonaisluku & Yksikäsittinen, automaattisesti generoitava kohteen tunnus. \\
+Tilaus & Merkkijono & Sen tilauksen tunnus, jonka osana tilauskohde on. \\
+Tuote & Kokonaisluku & Tuotetunnus, johon kohde liittyy. \\
+Hinta & Desimaaliluku & Kohteen yhteishinta, perustuen hintoihin tilauksen toimitusajankohtana. Sisältää tuotteen itsensä, lisukkeet, ja on valmiiksi kerrottu lukumäärällä. \\
+Lukumäärä & Kokonaisluku & Positiivinen luku, joka kertoo monta kappeletta kyseistä tuotetta tilaukseen kuuluu. \\
+\end{tabular}
+
+\subsection*{Lisuke}
+Tiettyyn tilauskohteeseen liittyvä lisuke, eli pizzan lisätäyte tms.
+
+\vspace{0.5cm}\hspace{-1cm}
+\begin{tabular}{l l p{7cm}}
+\textbf{Attribuutti} & \textbf{Tyyppi} & \textbf{Kuvaus} \\
+\hline
+Tunnus & Kokonaisluku & Yksikäsitteinen tunnus. \\
+Tilauskohde & Kokonaisluku & Tilauskohde johon lisuke liittyy. \\
+Tuote & Kokonaisluku & Lisuketuotteen tunnus. \\
+Hinta & Desimaaliluku & Lisuketuotteen hinta tilauksen toimitusajankohtana. \\
+\end{tabular}
+
+\subsection*{Ylläpidon käyttäjätunnus}
+Käyttäjätunnus, jolla voi kirjautua järjestelmän ylläpitoon.
+
+\vspace{0.5cm}\hspace{-1cm}
+\begin{tabular}{l l p{7cm}}
+\textbf{Attribuutti} & \textbf{Tyyppi} & \textbf{Kuvaus} \\
+\hline
+Käyttäjänimi & Merkkijono & Uniikki käyttäjänimi. \\
+Salasanan hajautusarvo & Merkkijono & Suolatun salasanan hajautusarvo. \\
+\end{tabular}
+
+\end{document}

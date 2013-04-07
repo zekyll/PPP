@@ -1,0 +1,5 @@
+doc/tex/*.png
+doc/tex/*.log
+doc/tex/*.aux
+doc/tex/*.pdf
+nbproject/

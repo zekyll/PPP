@@ -1,0 +1,6 @@
+<?php
+	$MAX_ORDER_ITEMS = 10;
+	$MAX_EXTRAS = 4;
+	$DATABASE_USERNAME = '';
+	$DATABASE_PASSWORD = '';
+?>
