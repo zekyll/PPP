@@ -282,6 +282,16 @@ class Queries {
 		}
 		return $q->fetchObject();
 	}
+
+	public function change_password($username, $password_hash) {
+		try {
+			$q = $this->_pdo->prepare('UPDATE management_user SET '
+					. 'password_hash = ? WHERE username = ?');
+			$q->execute(array($password_hash, $username));
+		} catch (PDOException $e) {
+			add_error('Salasanan vaihto epäonnistui.');
+		}
+	}
 }
 
 try {

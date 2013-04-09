@@ -1,7 +1,6 @@
 <?php $title = 'Tilaustiedot'; require 'top.php'; ?>
 
 <?php
-	require_once 'config.php';
 	require_once 'util/queries.php';
 	require_once 'util/util.php';
 

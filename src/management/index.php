@@ -7,4 +7,6 @@
 
 <?php require dirname(__file__) . '/../util/messages.php'; ?>
 
+<p><a href="changepswd.php">Vaihda salasanaa</a></p>
+
 <?php require 'bottom.php'; ?>

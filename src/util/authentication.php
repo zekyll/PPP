@@ -37,3 +37,9 @@ function login($username, $password) {
 		$session->username = $user->username;
 	return $user;
 }
+
+// Vaihtaa käyttäjän salasanan.
+function change_password($username, $new_password) {
+	global $queries;
+	$queries->change_password($username, pswd_hash($new_password));
+}

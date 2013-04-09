@@ -5,9 +5,8 @@
 
 	if (array_key_exists('login', $_GET)) {
 		$user = login($_POST['username'], $_POST['password']);
-		$session->tmp = $user;
 		if ($user) {
-			add_msg('Kirjautuminen onnistui.');
+			add_msg('Sisäänkirjautuminen onnistui.');
 			redirect('.');
 		} else {
 			add_error('Käyttäjänimi tai salasana oli väärin.');
@@ -15,7 +14,7 @@
 		}
 	} elseif (array_key_exists('logout', $_GET)) {
 		unset($session->username);
-		redirect('login.php');
+		redirect('.');
 	}
 ?>
 
@@ -31,7 +30,7 @@
 
 	<div>
 		Salasana:<br>
-		<input type="text" name="password">
+		<input type="password" name="password">
 	</div>
 
 	<input type="submit" name="login" value="Kirjaudu">
