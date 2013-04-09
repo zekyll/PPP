@@ -14,8 +14,10 @@
 		$order->contact = $_POST['contact'];
 		$order->when_to_deliver = date_create_from_format('j.n.Y H:i', $_POST['when_to_deliver']);
 		if (!$order->when_to_deliver) {
-			add_error('Toimitusajankohdan formaatti on väärin.');
+			add_error('Toimitusajankohta ei ole kelvollinen päivämäärä/aika.');
 			$order->when_to_deliver = $_POST['when_to_deliver'];
+		} else if ($order->when_to_deliver < new DateTime("+15 minutes")) {
+			add_error('Toimitukseen tulee olla aikaa vähintään 15 minuuttia.');
 		}
 		$order->additional_info = $_POST['additional_info'];
 
@@ -51,8 +53,6 @@
 		if (empty($order->items))
 			add_error('Tilauksessa tulee olla vähintään yksi tuote.');
 
-		//TODO
-
 		if (!have_errors()) {
 			if (array_key_exists('update', $_POST)) {
 				$order->id = $id;
@@ -71,24 +71,24 @@
 			add_msg('Tilaus poistettu');
 			redirect('products.php');
 		}
+	} else {
+		if ($id && $order == NULL) {
+			$order = $queries->select_order($id);
+		} else if ($order == NULL) {
+			$order = new stdClass();
+			$order->name = '';
+			$order->address = '';
+			$order->contact = '';
+			$order->when_to_deliver = '';
+			$order->additional_info = NULL;
+			$order->items = array();
+		}
 	}
 ?>
 
 <?php $title = 'Tilaus'; require 'top.php'; ?>
 
 <?php
-	if ($id && $order == NULL) {
-		$order = $queries->select_order($id);
-	} else if ($order == NULL) {
-		$order = new stdClass();
-		$order->name = '';
-		$order->address = '';
-		$order->contact = '';
-		$order->when_to_deliver = '';
-		$order->additional_info = NULL;
-		$order->items = array();
-	}
-
 	require 'util/messages.php';
 
 	$products = $queries->select_products();

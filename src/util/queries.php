@@ -213,6 +213,8 @@ class Queries {
 
 		if ($order)
 			$order->when_to_deliver = date_create_from_format('Y-m-d H:i:s', $order->when_to_deliver);
+		if ($order)
+			$order->when_delivered = date_create_from_format('Y-m-d H:i:s', $order->when_delivered);
 
 		return $order;
 	}
@@ -264,10 +266,16 @@ class Queries {
 
 	public function update_delivery_info($order) {
 		try {
-			$q = $this->_pdo->prepare('UPDATE customer_order SET when_delivered=?, '
-					. 'price_on_delivery=?, notes=?, prevent=? WHERE id = ?');
-			$q->execute(array($order->when_delivered, $order->price_on_delivery,
-					$order->notes, $order->prevent ? 'true' : 'false', $order->id));
+			$datestr = $this->_pdo->quote(date_format($order->when_delivered, 'Y-m-d H:i'));
+			$query_str = 'UPDATE customer_order SET when_delivered='
+				. ($order->when_delivered ? $datestr : 'when_to_deliver')
+				. ', price_on_delivery='
+				. ($order->price_on_delivery ? $this->_pdo->quote($order->price_on_delivery) : 'price')
+				. ', notes=?, prevent=? WHERE id = ?';
+
+			$q = $this->_pdo->prepare($query_str);
+			$q->execute(array($order->notes, $order->prevent ? 'true' : 'false',
+					$order->id));
 		} catch (PDOException $e) {
 			add_error('Toimitustietojen tallennus epäonnistui.');
 		}

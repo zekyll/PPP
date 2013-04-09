@@ -14,13 +14,22 @@
 		$product->type = $_POST['type'];
 		$product->price = str_replace(',', '.', $_POST["price"]);
 		$product->description = $_POST['description'];
-		if ($_FILES['image']['error'] > 0)
+		if ($_FILES['image']['error'] > 0) {
 			$product->image_name = NULL;
-		else {
-			$product->image_name = generateRandomId(16) . '.' .
-					end(explode('.', $_FILES["image"]["name"]));
-			move_uploaded_file($_FILES['image']['tmp_name'],
-					'../images/products/' . $product->image_name);
+			add_error('Kuvatiedoston siirrossa tapahtui virhe.');
+		} if ($_FILES['image']['size'] > 102400) {
+			$product->image_name = NULL;
+			add_error('Kuvatiedoston koko voi olla enintään 100 KiB.');
+		} else {
+			$ext = strtolower(end(explode('.', $_FILES["image"]["name"])));
+			if ($ext != 'jpg' && $ext != 'jpeg' && $ext != 'bmp'
+					&& $ext != 'gif' && $ext != 'png') {
+				add_error('Kuvatiedoston tyyppi tulee olla JPG, BMP, GIF tai PNG.');
+			} else {
+				$product->image_name = generateRandomId(16) . '.' . $ext;
+				move_uploaded_file($_FILES['image']['tmp_name'],
+						'../images/products/' . $product->image_name);
+			}
 		}
 
 		if (strlen($product->name) == 0)
@@ -28,7 +37,7 @@
 		if (strlen($product->type) == 0)
 			add_error('Tuoteryhmä puuttuu.');
 		if (!is_numeric($product->price))
-			add_error('Hinta tulee antaa desimaalilukuna.' . $product->price);
+			add_error('Hinta ei ole kelvollinen desimaaliluku.');
 		if (round($product->price * 100) >= 100000000)
 			add_error('Hinnan tulee olla pienempi kuin 1000000.');
 
@@ -85,9 +94,10 @@
 	<input type="text" name="price" value="<?= htmlspecialchars(pricefmt($product->price)) ?>"></p>
 
 	<p>Kuvaus:<br>
-	<textarea name="description"><?= htmlspecialchars($product->description) ?></textarea></p>
+	<textarea rows="3" cols="40" name="description"><?= htmlspecialchars($product->description) ?></textarea></p>
 
 	<p>Kuva: <br>
+	<input type="hidden" name="MAX_FILE_SIZE" value="102400" />
 	<input type="file" name="image"></p>
 	<?php
 		if($id && $product->image_name)

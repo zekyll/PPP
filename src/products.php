@@ -35,7 +35,7 @@
 			echo htmlspecialchars($p->description);
 		echo "</p></div>\n";
 		if ($p->image_name != NULL)
-			echo '<a href="images/products/' .
+			echo '<a href="images/products/' ,
 				htmlspecialchars($p->image_name), '"><img alt="tuotekuva" class="productImg" src="images/products/' .
 				htmlspecialchars($p->image_name), '"></a>';
 		echo '</div>';

@@ -25,7 +25,7 @@
 
 	foreach($products as $p) {
 		echo '<tr>';
-		echo '<td><a href="product.php?id=', htmlspecialchars($p->id), '">' .
+		echo '<td><a href="product.php?id=', htmlspecialchars($p->id), '">',
 				htmlspecialchars($p->name), '</a></td>';
 		echo '<td>', htmlspecialchars($p->type), '</td>';
 		echo '<td>', htmlspecialchars(pricefmt($p->price)), '</td>';
