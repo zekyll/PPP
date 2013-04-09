@@ -61,12 +61,12 @@
 				$id = $order->id;
 			}
 			if(!have_errors())
-				header('Location: vieworder.php?id=' . $id);
+				redirect('vieworder.php?id=' . $id);
 		}
 	} elseif (array_key_exists('delete', $_POST)) {
 		$queries->delete_order($id);
 		if(!have_errors())
-			header('Location: products.php');
+			redirect('products.php');
 	}
 ?>
 

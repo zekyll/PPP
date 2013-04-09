@@ -21,12 +21,12 @@
 			$order->id = $id;
 			$queries->update_delivery_info($order);
 			if(!have_errors())
-				header('Location: order.php?id=' . $id);
+				redirect('order.php?id=' . $id);
 		}
 	} elseif (array_key_exists('delete', $_POST)) {
 		$queries->delete_order($id);
 		if(!have_errors())
-			header('Location: orders.php');
+			redirect('orders.php');
 	}
 ?>
 

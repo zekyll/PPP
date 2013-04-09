@@ -40,12 +40,12 @@
 				$id = $product->id;
 			}
 			if(!have_errors())
-				header('Location: product.php?id=' . $id);
+				redirect('product.php?id=' . $id);
 		}
 	} elseif (array_key_exists('delete', $_POST)) {
 		$queries->delete_product($id);
 		if (!have_errors())
-			header('Location: products.php');
+			redirect('products.php');
 	}
 ?>
 

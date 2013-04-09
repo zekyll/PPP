@@ -23,6 +23,12 @@ function isPositiveInteger($str)
 	return is_numeric($str) && is_int(($str + 0)) && $str > 0;
 }
 
+function redirect($location)
+{
+	header("Location: $location");
+	exit();
+}
+
 function add_error($error_msg)
 {
 	$GLOBALS['errors'][] = $error_msg;
