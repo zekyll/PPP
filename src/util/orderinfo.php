@@ -37,9 +37,9 @@
 					echo '<tr>';
 					echo '<td class="number">', htmlspecialchars($item->count), ' x</td>';
 					echo '<td>';
-					echo $product_map[$item->product]->name;
+					echo htmlspecialchars($product_map[$item->product]->name);
 					foreach ($item->extras as $extra)
-						echo "<br>- ", $product_map[$extra->product]->name;
+						echo "<br>- ", htmlspecialchars($product_map[$extra->product]->name);
 					echo '</td>';
 					echo '<td class="number">', htmlspecialchars($item->price), ' €</td>';
 					echo "</tr>\n";

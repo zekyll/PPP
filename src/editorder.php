@@ -106,7 +106,7 @@ function generate_options($products, $order_item_idx, $extra_idx, $selected)
 		if ($extra_idx === NULL xor $p->type == 'Lisätäytteet') {
 			$selattr = $p->id == $selected ? ' selected' : '';
 			echo '<option value="', htmlspecialchars($p->id), '"', $selattr, '>',
-					$p->name, "</option>\n";
+					htmlspecialchars($p->name), "</option>\n";
 		}
 	}
 }
