@@ -1,7 +1,11 @@
 <?php
-	require_once dirname(__file__).'/../config.php';
-	require_once dirname(__file__).'/../util/queries.php';
-	require_once dirname(__file__).'/../util/util.php';
+	require_once dirname(__file__) . '/../config.php';
+	require_once dirname(__file__) . '/../util/queries.php';
+	require_once dirname(__file__) . '/../util/util.php';
+	require_once dirname(__file__) . '/../util/session.php';
+	require_once dirname(__file__) . '/../util/authentication.php';
+
+	require_login();
 
 	$id = array_key_exists('id', $_GET) ? $_GET['id'] : NULL;
 	$order = NULL;
@@ -20,13 +24,17 @@
 		if (!have_errors()) {
 			$order->id = $id;
 			$queries->update_delivery_info($order);
-			if(!have_errors())
+			if(!have_errors()) {
+				add_msg('Toimitustiedot tallennettu');
 				redirect('order.php?id=' . $id);
+			}
 		}
 	} elseif (array_key_exists('delete', $_POST)) {
 		$queries->delete_order($id);
-		if(!have_errors())
+		if(!have_errors()) {
+			add_msg('Tilaus poistettu');
 			redirect('orders.php');
+		}
 	}
 ?>
 
@@ -43,12 +51,12 @@
 		$order->prevent = '';
 	}
 
-	require dirname(__file__).'/../util/messages.php';
+	require dirname(__file__) . '/../util/messages.php';
 
 	$products = $queries->select_products();
 ?>
 
-<?php require dirname(__file__).'/../util/orderinfo.php'; ?>
+<?php require dirname(__file__) . '/../util/orderinfo.php'; ?>
 
 <h2>Toimituksen kirjaus</h2>
 

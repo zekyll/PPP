@@ -47,3 +47,6 @@ CREATE TABLE management_user (
     password_hash     varchar
 );
 
+INSERT INTO management_user (username, password_hash) VALUES
+	('admin', '$2a$10$iZT9lHMlMzje89jClrCTdOpJgFJMxSz6AuuGX/XDI9iQjD1kc/2Uq')
+;

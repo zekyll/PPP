@@ -1,3 +1,8 @@
+<?php
+	require_once dirname(__file__) . '/../util/authentication.php';
+	require_login();
+?>
+
 <?php $title = 'Tilaukset'; require 'top.php'; ?>
 
 <table border="1">
@@ -10,7 +15,7 @@
 </tr>
 
 <?php
-	require_once dirname(__file__).'/../util/queries.php';
+	require_once dirname(__file__) . '/../util/queries.php';
 
 	$orders = $queries->select_orders();
 

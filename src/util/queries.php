@@ -1,7 +1,8 @@
 <?php
 
-require_once dirname(__file__).'/../config.php';
+require_once dirname(__file__) . '/../config.php';
 require_once 'util.php';
+require_once 'session.php';
 
 class Queries {
 
@@ -270,6 +271,16 @@ class Queries {
 		} catch (PDOException $e) {
 			add_error('Toimitustietojen tallennus epäonnistui.');
 		}
+	}
+
+	public function select_user($username) {
+		try {
+			$q = $this->_pdo->prepare('SELECT * FROM management_user WHERE username = ?');
+			$q->execute(array($username));
+		} catch (PDOException $e) {
+			add_error('Käyttäjätietojen tarkistus epäonnistui.');
+		}
+		return $q->fetchObject();
 	}
 }
 

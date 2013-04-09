@@ -28,17 +28,3 @@ function redirect($location)
 	header("Location: $location");
 	exit();
 }
-
-function add_error($error_msg)
-{
-	$GLOBALS['errors'][] = $error_msg;
-}
-
-function have_errors()
-{
-	return !empty($GLOBALS['errors']);
-}
-
-$errors = array();
-
-?>

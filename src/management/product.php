@@ -1,6 +1,9 @@
 <?php
-	require_once dirname(__file__).'/../util/queries.php';
-	require_once dirname(__file__).'/../util/util.php';
+	require_once dirname(__file__) . '/../util/queries.php';
+	require_once dirname(__file__) . '/../util/util.php';
+	require_once dirname(__file__) . '/../util/authentication.php';
+
+	require_login();
 
 	$id = array_key_exists('id', $_GET) ? $_GET['id'] : NULL;
 	$product = NULL;
@@ -30,7 +33,6 @@
 		if (round($product->price * 100) >= 100000000)
 			add_error('Hinnan tulee olla pienempi kuin 1000000.');
 
-
 		if (!have_errors()) {
 			if (array_key_exists('update', $_POST)) {
 				$product->id = $id;
@@ -39,13 +41,17 @@
 				$queries->insert_product($product);
 				$id = $product->id;
 			}
-			if(!have_errors())
+			if(!have_errors()) {
+				add_msg('Tuotetiedot tallennettu');
 				redirect('product.php?id=' . $id);
+			}
 		}
 	} elseif (array_key_exists('delete', $_POST)) {
 		$queries->delete_product($id);
-		if (!have_errors())
+		if (!have_errors()) {
+			add_msg('Tuote poistettu');
 			redirect('products.php');
+		}
 	}
 ?>
 
@@ -65,7 +71,7 @@
 		$product->image_name = $queries->select_product($id)->image_name;
 	}
 
-	require dirname(__file__).'/../util/messages.php';
+	require dirname(__file__) . '/../util/messages.php';
 ?>
 
 <form action="product.php<?= $id ? '?id=' . htmlspecialchars($id) : '' ?>" method="post"
@@ -91,7 +97,7 @@
 
 	<?php
 		if($id) {
-			echo '<input type="submit" name="update" value="Päivitä tiedot">';
+			echo '<input type="submit" name="update" value="Tallenna tiedot">';
 			echo '<input type="submit" name="delete" value="Poista tuote">';
 		} else
 			echo '<input type="submit" name="insert" value="Lisää tuote">';

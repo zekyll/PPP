@@ -1,4 +1,11 @@
+<?php
+	require_once dirname(__file__) . '/../util/authentication.php';
+	require_login();
+?>
+
 <?php $title = 'Tuotteet'; require 'top.php'; ?>
+
+<?php require dirname(__file__) . '/../util/messages.php'; ?>
 
 <a href="product.php">Lisää uusi tuote</a>
 
@@ -12,7 +19,7 @@
 </tr>
 
 <?php
-	require_once dirname(__file__).'/../util/queries.php';
+	require_once dirname(__file__) . '/../util/queries.php';
 
 	$products = $queries->select_products();
 

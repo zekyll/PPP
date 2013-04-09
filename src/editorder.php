@@ -2,6 +2,7 @@
 	require_once 'config.php';
 	require_once 'util/queries.php';
 	require_once 'util/util.php';
+	require_once 'util/session.php';
 
 	$id = array_key_exists('id', $_GET) ? $_GET['id'] : NULL;
 	$order = NULL;
@@ -60,13 +61,16 @@
 				$queries->insert_order($order);
 				$id = $order->id;
 			}
-			if(!have_errors())
+			if(!have_errors()) {
 				redirect('vieworder.php?id=' . $id);
+			}
 		}
 	} elseif (array_key_exists('delete', $_POST)) {
 		$queries->delete_order($id);
-		if(!have_errors())
+		if(!have_errors()) {
+			add_msg('Tilaus poistettu');
 			redirect('products.php');
+		}
 	}
 ?>
 

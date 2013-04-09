@@ -2,7 +2,6 @@
 
 <p><a href="editorder.php">Tee uusi tilaus</a></p>
 
-
 <p>Voit myös tarkastella ja muokata aikaisempaa tilausta:
  </p>
 
