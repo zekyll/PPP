@@ -10,12 +10,19 @@ function generateRandomId($length) {
 		return $id;
 }
 
+// Palauttaa DateTime-objektin tekstinä suomalaisessa muodossa.
 function datefmt($date)
 {
 	if ($date instanceof DateTime)
 		return $date->format('j.n.Y H:i');
 	else
 		return $date;
+}
+
+// Palauttaa luvun tekstinä käyttäen pilkkua desimaalierottimena.
+function pricefmt($price)
+{
+	return str_replace('.', ',', $price);
 }
 
 function isPositiveInteger($str)

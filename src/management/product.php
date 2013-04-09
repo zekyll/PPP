@@ -12,8 +12,7 @@
 		$product = new stdClass();
 		$product->name = $_POST['name'];
 		$product->type = $_POST['type'];
-		//$product->price = str_replace(',', '.', $_POST["price"]);
-		$product->price = $_POST['price'];
+		$product->price = str_replace(',', '.', $_POST["price"]);
 		$product->description = $_POST['description'];
 		if ($_FILES['image']['error'] > 0)
 			$product->image_name = NULL;
@@ -29,7 +28,7 @@
 		if (strlen($product->type) == 0)
 			add_error('Tuoteryhmä puuttuu.');
 		if (!is_numeric($product->price))
-			add_error('Hinta tulee antaa desimaalilukuna.');
+			add_error('Hinta tulee antaa desimaalilukuna.' . $product->price);
 		if (round($product->price * 100) >= 100000000)
 			add_error('Hinnan tulee olla pienempi kuin 1000000.');
 
@@ -83,7 +82,7 @@
 	<input type="text" name="type" value="<?= htmlspecialchars($product->type) ?>">	</p>
 
 	<p>Hinta: <br>
-	<input type="text" name="price" value="<?= htmlspecialchars($product->price) ?>"></p>
+	<input type="text" name="price" value="<?= htmlspecialchars(pricefmt($product->price)) ?>"></p>
 
 	<p>Kuvaus:<br>
 	<textarea name="description"><?= htmlspecialchars($product->description) ?></textarea></p>

@@ -40,14 +40,14 @@
 					foreach ($item->extras as $extra)
 						echo "<br>- ", htmlspecialchars($product_map[$extra->product]->name);
 					echo '</td>';
-					echo '<td class="number">', htmlspecialchars($item->price), ' €</td>';
+					echo '<td class="number">', htmlspecialchars(pricefmt($item->price)), ' €</td>';
 					echo "</tr>\n";
 				}
 				?>
 				<tr>
 					<td></td>
 					<td>Yht:</td>
-					<td class="number"><?= htmlspecialchars($order->price), ' €' ?></td>
+					<td class="number"><?= htmlspecialchars(pricefmt($order->price)), ' €' ?></td>
 				</tr>
 			</table>
 		</td>

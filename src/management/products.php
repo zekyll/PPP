@@ -28,7 +28,7 @@
 		echo '<td><a href="product.php?id=', htmlspecialchars($p->id), '">' .
 				htmlspecialchars($p->name), '</a></td>';
 		echo '<td>', htmlspecialchars($p->type), '</td>';
-		echo '<td>', htmlspecialchars($p->price), '</td>';
+		echo '<td>', htmlspecialchars(pricefmt($p->price)), '</td>';
 		echo '<td>', htmlspecialchars($p->description), '</td>';
 		if($p->image_name != NULL)
 			echo '<td><a href="../images/products/',

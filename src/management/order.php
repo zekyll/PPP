@@ -13,7 +13,7 @@
 	if (array_key_exists('update', $_POST)) {
 		$order = new stdClass();
 		$order->when_delivered = $_POST['when_delivered'];
-		$order->price_on_delivery = $_POST['price_on_delivery'];
+		$order->price_on_delivery = str_replace(',', '.', $_POST['price_on_delivery']);
 		$order->notes = $_POST['notes'];
 		$order->prevent = array_key_exists('prevent', $_POST);
 
@@ -65,7 +65,7 @@
 	<input type="text" name="when_delivered" value="<?= htmlspecialchars($order->when_delivered) ?>"></p>
 
 	<p>Lopullinen hinta:<br>
-	<input type="text" name="price_on_delivery" value="<?= htmlspecialchars($order->price_on_delivery) ?>"></p>
+	<input type="text" name="price_on_delivery" value="<?= htmlspecialchars(pricefmt($order->price_on_delivery)) ?>"></p>
 
 	<p>Lisätiedot:<br>
 	<textarea name="notes"><?= htmlspecialchars($order->notes) ?></textarea></p>

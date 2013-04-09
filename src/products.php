@@ -28,7 +28,7 @@
 		echo '<div class="product">';
 		echo '<div class="productText">';
 
-		echo '<h4>', htmlspecialchars($p->name), ' - ', htmlspecialchars($p->price), '€</h4>';
+		echo '<h4>', htmlspecialchars($p->name), ' - ', htmlspecialchars(pricefmt($p->price)), '€</h4>';
 		echo '<p>';
 
 		if ($p->description != NULL)
