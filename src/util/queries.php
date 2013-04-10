@@ -103,6 +103,13 @@ class Queries {
 	}
 
 	private function insert_order_with_id($order) {
+		// Tarkistetaan onko osoite estetty.
+		$q = $this->_pdo->prepare('SELECT id FROM customer_order WHERE address = ? '
+				. 'and prevent = true');
+		$q->execute(array($order->address));
+		if($q->fetchObject())
+			throw new Exception('Tilausten tekeminen osoitteeseen on estetty.');
+
 		// Lasketaan tilauksen hinta.
 		$order->price = 0;
 		$q = $this->_pdo->prepare('SELECT price, type FROM product WHERE id = ?');
@@ -244,6 +251,9 @@ class Queries {
 		} catch (PDOException $e) {
 			try { $this->_pdo->rollBack(); } catch (PDOException $e2) { }
 			add_error('Tilaustietojen tallennus epäonnistui.');
+		} catch (Exception $e) {
+			try { $this->_pdo->rollBack(); } catch (PDOException $e2) { }
+			add_error($e->getMessage());
 		}
 	}
 
