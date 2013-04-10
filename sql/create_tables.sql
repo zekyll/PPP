@@ -18,7 +18,7 @@ CREATE TABLE customer_order (
     additional_info   varchar,
     confirmed         bool NOT NULL DEFAULT false,
     when_delivered    timestamp,
-    price_on_delivery decimal(6,2),
+    price_on_delivery decimal(8,2),
     notes             varchar,
     prevent           bool NOT NULL DEFAULT false
 );
