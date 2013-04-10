@@ -173,4 +173,34 @@ Käyttäjänimi & Merkkijono & Uniikki käyttäjänimi. \\
 Salasanan hajautusarvo & Merkkijono & Suolatun salasanan hajautusarvo. \\
 \end{tabular}
 
+\section{Relaatiotietokantakaavio}
+
+\begin{figure}[H]
+	\begin{center}
+	\caption{Tietokannan relaatiokaavio}
+	\includegraphics[height=8cm]{relaatiokaavio.png}
+	\end{center}
+\end{figure}
+
+\section{Järjestelmän yleisrakenne}
+
+\section{Järjestelmän komponentit}
+
+\section{Käyttöliittymä}
+
+Käyttöliittymä on jaettu kahteen erilliseen osaan: asiakkaiden käyttöön tarkoitettu pääsivusto (sivuston juurihakemisto "/") ja hallintasivusto ("/management/").
+
+Kummallakin näistä on oma aloitussivunsa, joista pääsee käsiksi tärkeimpiin toimintoihin. Lisäksi kummallakin on oma navigaatiopalkki, joka on näkyvissä jokaisen sivun yläreunassa.
+
+Kaikki ylläpitosivun toiminnot vaativat kirjautumisen. Asiakassivulla taas kaikki sivut ovat julkisia, paitsi aikaisempien tilausten tarkastelu ja muokkaus, joita varten tarvitsee tietää jonkin tilauksen tilaustunnus.
+
+\begin{figure}[H]
+	\begin{center}
+	\caption{Käyttöliittymäkaavio}
+	\includegraphics[height=6.5cm]{kayttoliittyma.png}
+	\end{center}
+\end{figure}
+
+\section{Asennustiedot}
+
 \end{document}
