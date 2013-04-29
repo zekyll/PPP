@@ -23,7 +23,7 @@ Palveluun liittyy yksinkertainen internet-sivusto, jonka kautta asiakkaat voivat
 
 Asiakas antaa tilauksen yhteydessä nimen, osoitteen, sekä puhelinnumeron tai sähköpostiosoitteen. Toimitukselle annetaan ajankohta, ja jos tilaukseen on aikaa yli tunti, sitä voidaan muokata tai se voidaan perua. Tilauksen laatimisen jälkeen on asiakkaan nähtävillä laskelma hinnoista, jotka määräytyvät toimitusajan mukaan.
 
-Palvelun hallintaa varten on oma sivustonsa, jolle ylläpitäjän tulee kirjautua. Ylläpitäjä voi lisätä tai poistaa tuotteita ja muokata niiden tietoja. Jokaisella tuotteella on nimi, kuvaus ja hinta, joka voi vaihdella eri kellonaikoina tai viikonpäivinä. Tuotteella voi lisäksi olla kuva. Tuotteet jaetaan tuoteryhmiin, joista pizzat ja lisätäytteet ovat erityisasemassa järjestelmän toiminnan kannalta.
+Palvelun hallintaa varten on oma sivustonsa, jolle ylläpitäjän tulee kirjautua. Ylläpitäjä voi lisätä tai poistaa tuotteita ja muokata niiden tietoja. Jokaisella tuotteella on nimi, kuvaus ja hinta. Tuotteella voi lisäksi olla kuva. Tuotteet jaetaan tuoteryhmiin, joista pizzat ja lisätäytteet ovat erityisasemassa järjestelmän toiminnan kannalta.
 
 Ylläpidon kautta on nähtävissä täydelliset tiedot tilauksista. Tilaukset voidaa kirjata toimitetuiksi, jolloin niistä kirjataan toimitusaika ja toteutunut hinta (voidaan esim. antaa alennusta myöhästymisen perusteella). Tilauksesta voidaan tallentaa lisähuomioita, ja tilaukseen liittyvään osoitteeseen voidaan estää uusien tilausten tekeminen.
 
@@ -58,7 +58,7 @@ Käyttäjätyyppejä on kaksi: asiakas ja ylläpitäjä. Heidän näkökulmastaa
 \item[Tuotteiden selaus]\mbox{}\\
 Asiakkaan on mahdollista nähdä lista kaikista tuotteista, joita on mahdollista tilata. Tuotteet ovat lajiteltuna tuoteryhmän mukaan, ja niista näytetään tuotteen nimi, lyhyt kuvaus, hinta sekä kuva, jos tuotteella on sellainen.
 \item[Tilauksen luonti]\mbox{}\\
-Asiakas voi valita pudotusvalikkojen avulla tilaukseen yhden tai useammaan tuotteen, sekä määrittää niiden lukumäärän. Pizzoille on lisäksi mahdollista valita lisätäytteitä. Asiakas syöttää järjestelmään omat tietonsa (nimi, osoite, puhelinnumero/sähköpostiosoite), toivotun toimitusajan, ja vapaamuotoiset lisätiedot. Jos jotkin annetuista tiedosta eivät ole kelvollisia, siitä näytetään virheilmoitus. Tilauksen laatimisen jälkeen järjestelmä näyttää yksityiskohtaisen hintalaskelman, jonka jälkeen asiakkaan tulee vielä hyväksyä tilaus. Tilauksesta näytetään myös sen tunnus, jonka avulla asiakas voi myöhemmin tarkastella tai muokata tilausta.
+Asiakas voi valita pudotusvalikkojen avulla tilaukseen yhden tai useammaan tuotteen, sekä määrittää niiden lukumäärän. Pizzoille on lisäksi mahdollista valita lisätäytteitä. Asiakas syöttää järjestelmään omat tietonsa (nimi, osoite, puhelinnumero/sähköpostiosoite), toivotun toimitusajan, ja vapaamuotoiset lisätiedot. Jos jotkin annetuista tiedosta eivät ole kelvollisia, siitä näytetään virheilmoitus. Tilauksen laatimisen jälkeen järjestelmä näyttää yksityiskohtaisen hintalaskelman. Tilauksesta näytetään myös sen tunnus, jonka avulla asiakas voi myöhemmin tarkastella tai muokata tilausta.
 \item[Tilauksen tarkastelu]\mbox{}\\
 Syöttämällä aikaisemman tilauksen tunnuksen asiakas voi nähdä samat tiedot jotka annettiin sen laatimisesen yhteydessä, sekä hintalaskelman. Lisäksi sivulla on linkki, jotka kautta pääsee tilauksen muokkaukseen, sekä mahdollisuus tilauksen poistoon. Nämä toiminnot ovat käytettävissä, jos toimitusajankohtaan on aikaa enemmän kuin tunti.
 \item[Tilauksen muokkaus]\mbox{}\\
@@ -86,7 +86,6 @@ Tilauksen tarkastelunäkymässä on nappi, jolla ylläpitäjä voi poistaa tilau
 Tilauksen tarkastelunäkymän ohessa on lomake, johon voi syöttää tiedot toimituksesta. Toimituksesta voidaan antaa sen toteutunut aika ja hinta; jos näitä ei anneta, järjestelmä olettaa, että ne ovat samat kuin alkuperäisissä tilaustiedoissa. Lisäksi voidaan tallentaa lisähuomioita esim. tilaukseen liittyneistä häiriöistä, ja voidaan valita asetus, joka automaattisesti estää myöhemmät tilaukset kyseisen tilauksen osoitteeseen.
 \item[Kirjautuminen]\mbox{}\\
 Käyttäjältä pyydetään käyttäjänimi ja salasana. Jos niitä vastaava käyttäjä löytyy tietokannasta, pääsee käyttäjä jatkamaan ylläpitosivulle. Muussa tapauksessa näytetään virheilmoitus.
-
 \end{description}
 
 \section{Tietosisältö}
@@ -100,7 +99,6 @@ Käyttäjältä pyydetään käyttäjänimi ja salasana. Jos niitä vastaava kä
 
 \subsection*{Tuote}
 Yksittäisen tuotteen tiedot. Järjestelmässä pidetään myös valikoimasta poistettujen tuotteiden tiedot, sillä niitä käyttäviä tilauksia saattaa olla vielä voimassa. Tuotteisiin viitataan tilauksista yksikäsitteisen tuotetunnuksen avulla.
-
 
 \vspace{0.5cm}\hspace{-1cm}
 \begin{tabular}{l l p{7cm}}
@@ -182,9 +180,145 @@ Salasanan hajautusarvo & Merkkijono & Suolatun salasanan hajautusarvo. \\
 	\end{center}
 \end{figure}
 
+\begin{verbatim}
+CREATE TABLE product (
+    id                serial PRIMARY KEY,
+    name              varchar NOT NULL,
+    type              varchar NOT NULL,
+    price             decimal(8,2) NOT NULL,
+    description       varchar,
+    image_name        varchar,
+    deleted           bool NOT NULL DEFAULT false
+);
+
+CREATE TABLE customer_order (
+    id                varchar PRIMARY KEY,
+    price             decimal(8,2) NOT NULL,
+    name              varchar NOT NULL,
+    address           varchar NOT NULL,
+    contact           varchar NOT NULL,
+    when_to_deliver   timestamp NOT NULL,
+    additional_info   varchar,
+    when_delivered    timestamp,
+    price_on_delivery decimal(8,2),
+    notes             varchar,
+    prevent           bool NOT NULL DEFAULT false
+);
+
+CREATE TABLE order_item (
+    id                serial PRIMARY KEY,
+    customer_order    varchar NOT NULL references customer_order(id)
+                           ON DELETE CASCADE,
+    product           serial NOT NULL references product(id)
+                           ON DELETE RESTRICT,
+    price             decimal(8,2) NOT NULL,
+    count             int NOT NULL CONSTRAINT pos CHECK(count > 0)
+);
+
+CREATE TABLE order_item_extra (
+    id                serial PRIMARY KEY,
+    order_item        serial NOT NULL references order_item(id)
+                          ON DELETE CASCADE,
+    product           serial NOT NULL references product(id)
+                          ON DELETE RESTRICT,
+    price             decimal(8,2) NOT NULL
+);
+
+CREATE TABLE management_user (
+    username          varchar PRIMARY KEY,
+    password_hash     varchar
+);
+
+INSERT INTO management_user (username, password_hash) VALUES
+	('admin', '$2a$10$iZT9lHMlMzje89jClrCTdOpJgFJMxSz6AuuGX/XDI9iQjD1kc/2Uq')
+;
+\end{verbatim}
+
 \section{Järjestelmän yleisrakenne}
 
+Git-repositorion hakemistorakenne on seuraavanlainen:
+
+\begin{description} \itemsep-3pt
+\item[src]\mbox{}\\
+src-hakemisto alikansioineen sisältää koko sivuston koodin. Asiakassivuston lähdekoodi on sen juurihakemistossa.
+\item[src/management]\mbox{}\\
+Hallintasivuston lähdekoodi.
+\item[src/util]\mbox{}\\
+Asiakas- ja hallintasivuston käyttämä yhteinen koodi, apufunktiot yms.
+\item[src/images]\mbox{}\\
+Kuvatiedostot.
+\item[src/images/products]\mbox{}\\
+Kansio, johon hallintasivuston kautta uploadatut tuotteiden kuvat tallennetaan.
+\item[src/images/products/samples]\mbox{}\\
+Esimerkkidatan vaatimat kuvatiedostot.
+\item[sql]\mbox{}\\
+SQL-komennot, joilla tietokannan taulut voidaan luoda ja poistaa, sekä generoida esimerkkidata.
+\item[doc]\mbox{}\\
+Dokumentaatio.
+\item[doc/tex]\mbox{}\\
+Latex-dokumentaation lähdekoodi ja kuvat.
+\end{description}
+
+PHP-koodia ei varsinaisesti ole organisoitu MVC-mallin mukaisesti, mutta kutakin sivua vastaava PHP-tiedosto on pyritty jakamaan controller- ja view-osiin. Alkuosassa määritellään sivuun liittyvä toiminnallisuus. Jälkimmäisessä osassa taas generoidaan sivun html-koodi.
+
+Sivustoon liittyvät asetukset on määritelty tiedostossa \texttt{config.php}.
+
 \section{Järjestelmän komponentit}
+
+\begin{description} \itemsep-5pt
+\item[src/bottom.php]\mbox{}\\
+HTML-koodi, joka liitetään jokaisen sivun alaosaan.
+\item[src/config.php]\mbox{}\\
+Konfiguraatiotiedosto.
+\item[src/editorder.php]\mbox{}\\
+Tilauksen luonti, muokkaus ja poisto.
+\item[src/index.php]\mbox{}\\
+Asiakassivuston etusivu.
+\item[src/order.php]\mbox{}\\
+Sivu, josta pääsee joko uuden tilauksen luontiin tai aiemman tilauksen tarkasteluun.
+\item[src/products.php]\mbox{}\\
+Hinnasto-/tuotelistasivu. Hakee tuotelistan tietokannasta ja näyttää ne ryhmiteltynä tuoteryhmän mukaan.
+\item[src/top.php]\mbox{}\\
+HTML-koodi, joka liitetään jokaisen sivun yläosaan. Näyttää valikon, jossa on linkit eri alasivuille.
+\item[src/vieworder.php]\mbox{}\\
+Tilauksen tarkastelusivu.
+\end{description}
+
+\begin{description} \itemsep-5pt
+\item[src/util/authentication.hp]\mbox{}\\
+Apufunktiot käyttäjän tunnistautumista ja salasanan hashausta varten.
+\item[src/util/messages.hp]\mbox{}\\
+Templaatti sessioon tallennettujen virheilmoitusten ym. viestien näyttämiseksi.
+\item[src/util/orderinfo.hp]\mbox{}\\
+Generoi HTML-taulun tilaustiedoille.
+\item[src/util/queries.hp]\mbox{}\\
+Tietokantaoperaatiot.
+\item[src/util/session.hp]\mbox{}\\
+Apuluokka muuttujien tallentamiseksi \$\_SESSION-taulukkoon.
+\item[src/util/util.hp]\mbox{}\\
+Yleiskäyttöisiä apufunktioita.
+\end{description}
+
+\begin{description} \itemsep-5pt
+\item[src/bottom.hp]\mbox{}\\
+HTML-koodi, joka liitetään jokaisen sivun alaosaan.
+\item[src/management/changepswd.php]\mbox{}\\
+Salasanan vaihto.
+\item[src/management/index.php]\mbox{}\\
+Hallintasivun etusivu.
+\item[src/management/login.php]\mbox{}\\
+Kirjautumissivu.
+\item[src/management/order.php]\mbox{}\\
+Tilauksen tarkastelu ja toimitustietojen kirjaus.
+\item[src/management/orders.php]\mbox{}\\
+Lista kaikista tilauksista.
+\item[src/management/product.php]\mbox{}\\
+Uuden tuotteen lisäys ja tuotetietojen muokkaus.
+\item[src/management/products.php]\mbox{}\\
+Lista kaikista tuotteista.
+\item[src/management/top.php]\mbox{}\\
+HTML-koodi, joka liitetään jokaisen sivun yläosaan. Näyttää valikon, josta pääsee eri alasivuille.
+\end{description}
 
 \section{Käyttöliittymä}
 
@@ -202,5 +336,44 @@ Kaikki ylläpitosivun toiminnot vaativat kirjautumisen. Asiakassivulla taas kaik
 \end{figure}
 
 \section{Asennustiedot}
+
+Sivuston käyttöönottamiseksi Apachessa riittää repositorion src-alihakemiston kopiointi sivuston juurihakemistoon.
+
+Apachella tulee olla lukuoikeus kaikkiin sivuston tiedostoihin, sekä listaus/execute-oikeus hakemistoihin. Kuvatiedostojen palvelimelle tallentamista varten täytyy lisäksi hakemistoon \texttt{images/products} olla asetettu kirjoitusoikeus.
+
+Tietokantaoperaatioita varten tulee palvelimella olla käyttävissä PostgreSQL. Tietokantayhteyden käyttäjätunnus ja salasana voidaan asettaa tiedostossa \texttt{config.php}.
+
+Ennen käyttöä tulee tietokannan taulut luoda create table -lauseiden avulla, jotka löytyvät tiedostosta \texttt{sql/create\_tables.sql}. Tämä onnistuu esimerkiksi komennolla \texttt{psql < create\_tables.sql}. Esimerkkidataa varten voidaan lisäksi suorittaa example\_data.sql. Taulujen poisto on mahdollista tiedoston drop\_tables.sql komennoilla.
+
+\section{Käyttöohje}
+
+Asiakassivusto on testattavissa osoitteessa
+
+\begin{verbatim}
+http://79.134.125.84/~tta/ppp
+\end{verbatim}
+
+ja hallintasivusto osoitteessa
+
+\begin{verbatim}
+http://79.134.125.84/~tta/ppp/management
+\end{verbatim}
+
+Oletuksena käyttäjätunnus hallintasivustolle on \texttt{admin} ja salasana \texttt{admin}.
+
+
+\section{Liitteet}
+
+Projektin GitHub-repositorio löytyy osoitteesta
+
+\begin{verbatim}
+https://github.com/zekyll/PPP
+\end{verbatim}
+
+Alkuperäinen tehtäväkuvaus on luettavissa sivulla
+
+\begin{verbatim}
+http://www.cs.helsinki.fi/u/laine/infoht/aiheet/is97hl5.html
+\end{verbatim}
 
 \end{document}
