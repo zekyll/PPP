@@ -1,3 +1,9 @@
+<?php
+	/*
+	 * Tulostaa virhe ym. viestit.
+	 */
+?>
+
 <?php require_once 'session.php' ?>
 
 <?php foreach ($session->errors as $e) { ?>

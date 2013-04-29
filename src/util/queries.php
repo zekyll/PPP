@@ -1,4 +1,7 @@
 <?php
+/*
+ * Tietokantaoperaatiot.
+ */
 
 require_once dirname(__file__) . '/../config.php';
 require_once 'util.php';
@@ -12,6 +15,7 @@ class Queries {
 		$this->_pdo = $pdo;
 	}
 
+	// Lisää uuden tuotteen.
 	public function insert_product($p) {
 		$q = $this->_pdo->prepare('INSERT INTO product (name, type,'
 				. ' price, description, image_name) VALUES (?, ?, ?, ?, ?)'
@@ -26,6 +30,7 @@ class Queries {
 		}
 	}
 
+	// Tallentaa tuotteen tiedot.
 	public function update_product($p) {
 		try {
 			if($p->image_name) {
@@ -44,6 +49,7 @@ class Queries {
 		}
 	}
 
+	// Hakee tuotteen tiedot.
 	public function select_product($id) {
 		try {
 			$q = $this->_pdo->prepare('SELECT * FROM product WHERE id = ?');
@@ -54,6 +60,8 @@ class Queries {
 		return $q->fetchObject();
 	}
 
+	// Hakee kaikki tuotteet järjestettynä ja ryhmiteltynä siten, että
+	// merkittävimmät tuoteryhmät tulevat ensiksi.
 	public function select_products() {
 		try {
 			$q = $this->_pdo->prepare('SELECT id, name, product.type, price, '
@@ -72,6 +80,7 @@ class Queries {
 		return $product_list;
 	}
 
+	// Poistaa tuotteen annetulla tuotetunnuksella.
 	public function delete_product($id) {
 		try {
 			$q = $this->_pdo->prepare('DELETE FROM product WHERE id = ?');
@@ -85,6 +94,7 @@ class Queries {
 		}
 	}
 
+	// Hakee tuoteryhmät.
 	public function select_types() {
 		try {
 			$q = $this->_pdo->prepare('SELECT type, sum(price) as srt FROM product'
@@ -102,6 +112,7 @@ class Queries {
 		return $type_list;
 	}
 
+	// Apufunktio tilauksen lisäämistä varten.
 	private function insert_order_with_id($order) {
 		// Tarkistetaan onko osoite estetty.
 		$q = $this->_pdo->prepare('SELECT id FROM customer_order WHERE address = ? '
@@ -154,6 +165,7 @@ class Queries {
 		}
 	}
 
+	// Lisää uuden tilauksen.
 	public function insert_order($order) {
 		// Generoidaan tilaukselle tunniste.
 		$order->id = generateRandomId(10);
@@ -178,6 +190,7 @@ class Queries {
 		}
 	}
 
+	// Hakee tilauksen annetulla tunnuksella.
 	public function select_order($id) {
 		try {
 			$this->_pdo->beginTransaction();
@@ -226,12 +239,14 @@ class Queries {
 		return $order;
 	}
 
+	// Apufunktio tilauksen poistoa varten.
 	private function delete_order_impl($id) {
 		// Poistaa myös vastaavat order_item ja order_item_extra-tietueet (CASCADE).
 		$q = $this->_pdo->prepare('DELETE FROM customer_order WHERE id = ?');
 		$q->execute(array($id));
 	}
 
+	// Poistaa tilauksen.
 	public function delete_order($id) {
 		try {
 			$this->delete_order_impl($id);
@@ -240,6 +255,7 @@ class Queries {
 		}
 	}
 
+	// Tallentaa tilauksen tiedot.
 	public function update_order($order) {
 		try {
 			$this->_pdo->beginTransaction();
@@ -257,6 +273,7 @@ class Queries {
 		}
 	}
 
+	// Hakee kaikki tilaukset.
 	public function select_orders() {
 		try {
 			$q = $this->_pdo->prepare('SELECT * FROM customer_order ORDER BY '
@@ -274,6 +291,7 @@ class Queries {
 		return $order_list;
 	}
 
+	// Tallentaa tilauksen toimitustiedot.
 	public function update_delivery_info($order) {
 		try {
 			$datestr = $this->_pdo->quote(date_format($order->when_delivered, 'Y-m-d H:i'));
@@ -291,6 +309,7 @@ class Queries {
 		}
 	}
 
+	// Hakee käyttäjän.
 	public function select_user($username) {
 		try {
 			$q = $this->_pdo->prepare('SELECT * FROM management_user WHERE username = ?');
@@ -301,6 +320,7 @@ class Queries {
 		return $q->fetchObject();
 	}
 
+	// Muuttaa salasanan.
 	public function change_password($username, $password_hash) {
 		try {
 			$q = $this->_pdo->prepare('UPDATE management_user SET '

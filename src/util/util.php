@@ -1,5 +1,9 @@
 <?php
+/*
+ * Yleiskäyttöisiä apufunktioita.
+ */
 
+// Generoi merkeistä A-Z, 0-9 satunnaisen merkkijonon, jolla on annettu pituus.
 function generateRandomId($length) {
 		$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -25,11 +29,13 @@ function pricefmt($price)
 	return str_replace('.', ',', $price);
 }
 
+// Testaa onko merkkijono positiivinen kokonaisluku.
 function isPositiveInteger($str)
 {
 	return is_numeric($str) && is_int(($str + 0)) && $str > 0;
 }
 
+// Uudelleenohjaa sivun annettuun osoitteeseen.
 function redirect($location)
 {
 	header("Location: $location");

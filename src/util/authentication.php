@@ -1,4 +1,7 @@
 <?php
+/*
+ * Apufunktioita käyttäjän tunnistautumista varten.
+ */
 
 require_once 'queries.php';
 require_once 'session.php';

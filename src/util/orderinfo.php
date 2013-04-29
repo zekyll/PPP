@@ -1,3 +1,8 @@
+<?php
+	/*
+	 * Generoi HTML-taulun tilaustiedoille.
+	 */
+?>
 <table>
 	<tr>
 		<td class="nfotitle">Tunnus:</td>

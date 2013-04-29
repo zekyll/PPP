@@ -1,4 +1,18 @@
 <?php
+	/*
+	 * Uuden tuotteen lisäys ja tuotetietojen muokkaus.
+	 *
+	 * Ilman parametreja näytetään tyhjä lomake uuden tuotteen lisäämiseksi.
+	 *
+	 * Jos $_GET-parametrina annettu "id", näytetään muokkauslomake kyseiselle
+	 * tuotteelle.
+	 *
+	 * Jos $_POST-parametrina annettu "insert" tai "update", tallennetaan
+	 * lomakkeen tiedot tietokantaan (uusi tuote tai aiemman muokkaus).
+	 *
+	 * Jos $_POST-parametrina annettu "delete", poistetaan tuote kannasta.
+	 */
+
 	require_once dirname(__file__) . '/../util/queries.php';
 	require_once dirname(__file__) . '/../util/util.php';
 	require_once dirname(__file__) . '/../util/authentication.php';

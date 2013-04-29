@@ -1,4 +1,13 @@
 <?php
+	/*
+	 * Salasanan vaihto.
+	 *
+	 * Ilman parametreja näytetään lomake salasanan vaihtamiseksi.
+	 *
+	 * Jos $_POST-parametrina on annettu "change", vaihdetaan kirjautuneen
+	 * käyttäjän salasana lomakkeen mukaisesti.
+	 */
+
 	require_once dirname(__file__) . '/../util/util.php';
 	require_once dirname(__file__) . '/../util/session.php';
 	require_once dirname(__file__) . '/../util/authentication.php';
@@ -33,17 +42,14 @@
 		Vanha salasana:<br>
 		<input type="password" name="password">
 	</div>
-
 	<div>
 		Uusi salasana:<br>
 		<input type="password" name="newpassword">
 	</div>
-
 	<div>
 		Toista uusi salasana:<br>
 		<input type="password" name="newpassword2">
 	</div>
-
 	<input type="submit" name="change" value="Vaihda">
 </form>
 

@@ -1,4 +1,18 @@
 <?php
+	/*
+	 * Tilauksen luonti, muokkaus ja poisto.
+	 *
+	 * Jos sivu ladataan ilman $_GET/$_POST -parametreja, näytetään tyhjä lomake
+	 * uuden tilauksen luomiseksi.
+	 *
+	 * Jos on annettu tilaustunnus "id"-parametrissa (editorder.php?=id=xxx),
+	 * ladataan lomakkeeseen ko. tilauksen tiedot niiden muokkaamiseksi.
+	 *
+	 * Jos $_POST-parametrina on annettu "update"/"insert"/"delete", niin
+	 * päivitetään tilauksen tiedot kannassa, luodaan uusi tilaus tai poistetaan
+	 * tilaus.
+	 */
+
 	require_once 'config.php';
 	require_once 'util/queries.php';
 	require_once 'util/util.php';

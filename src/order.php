@@ -1,3 +1,10 @@
+<?php
+	/*
+	 * Sivu, josta pääsee joko uuden tilauksen luontiin tai aiemman tilauksen
+	 * tarkasteluun.
+	 */
+?>
+
 <?php $title = 'Tilaus'; require 'top.php'; ?>
 
 <p><a href="editorder.php">Tee uusi tilaus</a></p>

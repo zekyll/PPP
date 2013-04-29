@@ -1,4 +1,16 @@
 <?php
+	/*
+	 * Tilauksen tarkastelu ja toimitustietojen kirjaus. Tilaustunnus
+	 * annetaan "id"-parametrissa.
+	 *
+	 * Ilman muita parametreja näytetään tilauksen tiedot ja aikaisemmat
+	 * toimitustiedot.
+	 *
+	 * Jos $_POST-parametrina on annettu "update", tallennetaan toimitustiedot.
+	 *
+	 * Jos $_POST-parametrina on annettu "delete", poistetaan tilaus.
+	 */
+
 	require_once dirname(__file__) . '/../config.php';
 	require_once dirname(__file__) . '/../util/queries.php';
 	require_once dirname(__file__) . '/../util/util.php';

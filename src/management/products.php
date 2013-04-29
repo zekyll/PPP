@@ -1,4 +1,8 @@
 <?php
+	/*
+	 * Lista kaikista tuotteista.
+	 */
+
 	require_once dirname(__file__) . '/../util/authentication.php';
 	require_login();
 ?>

@@ -1,3 +1,9 @@
+<?php
+	/*
+	 * HTML-koodi, joka liitetään jokaisen sivun yläosaan. Näyttää valikon,
+	 * josta pääsee eri alasivuille.
+	 */
+?>
 <!DOCTYPE html>
 <html>
 

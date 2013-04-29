@@ -1,4 +1,7 @@
 <?php
+/*
+ * Apuluokka muuttujien tallentamiseksi $_SESSION-taulukkoon.
+ */
 
 require_once 'util.php';
 

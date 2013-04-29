@@ -1,4 +1,15 @@
 <?php
+	/*
+	 * Sisään- ja uloskirjautuminen.
+	 *
+	 * Ilman parametreja näytetään sisäänkirjautumissivu.
+	 *
+	 * Jos $_GET-parametrina on annettu "login", yritetään
+	 * kirjautua sisään annetulla käyttäjänimellä/salasanalla.
+	 *
+	 * Jos $_GET-parametrina on annettu "logout", kirjaudutaan ulos.
+	 */
+
 	require_once dirname(__file__) . '/../util/util.php';
 	require_once dirname(__file__) . '/../util/session.php';
 	require_once dirname(__file__) . '/../util/authentication.php';

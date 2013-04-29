@@ -1,18 +1,23 @@
-<?php $title = 'Tilaustiedot'; require 'top.php'; ?>
-
 <?php
+	/*
+	 * Näyttää tilauksen tiedot.
+	 */
+
 	require_once 'util/queries.php';
 	require_once 'util/util.php';
 
 	$id = array_key_exists('id', $_GET) ? $_GET['id'] : NULL;
 	$order = $queries->select_order($id);
-
-	require 'util/messages.php';
-
 	$products = $queries->select_products();
 ?>
 
-<?php if (!have_errors()) { ?>
+<?php $title = 'Tilaustiedot'; require 'top.php'; ?>
+
+<?php
+	require 'util/messages.php';
+
+	if (!have_errors()) {
+?>
 
 <?php require 'util/orderinfo.php'; ?>
 

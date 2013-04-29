@@ -1,8 +1,16 @@
+<?php
+	/*
+	 * Hinnasto/tuotelista. Hakee tuotelistan tietokannasta ja näyttää
+	 * ne ryhmiteltynä tuoteryhmän mukaan.
+	 */
+?>
+
 <?php $title = 'Hinnasto'; require 'top.php'; ?>
 
 <?php
 	require_once 'util/queries.php';
 
+	// Haetaan tuoteryhmien nimet tietokannasta.
 	$types = $queries->select_types();
 
 	// Linkit hinnaston eri tuoteryhmiin.
@@ -12,8 +20,12 @@
 		++$i;
 	}
 
-	// Lista kaikista tuotteista ryhmiteltynä tuoteryhmän mukaan.
+	// Haetaan tuotelista tietokannasta.
 	$products = $queries->select_products();
+
+	// Lista kaikista tuotteista ryhmiteltynä tuoteryhmän mukaan. Haku palauttaa
+	// tuotteet valmiiksi oikeassa järjestyksessä, joten tulee ainoastaa
+	// lisätä tuoteryhmien otsikot oikeisiin väleihin.
 	$type = "";
 	$i = 0;
 	foreach($products as $p) {
