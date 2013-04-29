@@ -22,13 +22,13 @@ INSERT INTO product (name, type, price, description, image_name) VALUES
 ('Oregano', 'Lisätäytteet', 0.00, NULL, NULL)
 ;
 
-INSERT INTO customer_order (id, price, name, address, contact, when_to_deliver, additional_info, confirmed) VALUES
-('J2POY0O0F3', 16.20, 'Matti Meikäläinen', 'Kotikatu 13 01234 Kaupunki', '01-23456789', '2013-06-01 18:00:00', 'Laittakaa paljon oregaanoa!', True)
+INSERT INTO customer_order (id, price, name, address, contact, when_to_deliver, additional_info) VALUES
+('J2POY0O0F3', 16.20, 'Matti Meikäläinen', 'Kotikatu 13 01234 Kaupunki', '01-23456789', '2013-06-01 18:00:00', 'Laittakaa paljon oregaanoa!')
 ;
 
-INSERT INTO customer_order (id, price, name, address, contact, when_to_deliver, additional_info, confirmed, when_delivered, price_on_delivery, notes, prevent) VALUES
-('UJD2JE22MK', 24.00, 'Maija Suomalainen', 'Kotitie 1 04321 City', 'maija.suomalainen@mailidomain.fi', '2013-06-04 17:00:00', NULL, True, '2013-06-01 17:10:00', 20.00, '', False),
-('J2FK8H2NSS', 20.00, 'Risto Rämä', 'Slummitie 4 54321 Peräkylä', '09-9876543321', '2013-06-01 20:05:00', NULL, True, '2013-06-01 20:00:00', 20.00, 'Asiakas ei maksanut.', True)
+INSERT INTO customer_order (id, price, name, address, contact, when_to_deliver, additional_info, when_delivered, price_on_delivery, notes, prevent) VALUES
+('UJD2JE22MK', 24.00, 'Maija Suomalainen', 'Kotitie 1 04321 City', 'maija.suomalainen@mailidomain.fi', '2013-06-04 17:00:00', NULL, '2013-06-01 17:10:00', 20.00, '', False),
+('J2FK8H2NSS', 20.00, 'Risto Rämä', 'Slummitie 4 54321 Peräkylä', '09-9876543321', '2013-06-01 20:05:00', NULL, '2013-06-01 20:00:00', 20.00, 'Asiakas ei maksanut.', True)
 ;
 
 INSERT INTO order_item (customer_order, product, price, count) VALUES

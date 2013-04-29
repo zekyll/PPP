@@ -14,9 +14,11 @@
 <?php $title = 'Tilaustiedot'; require 'top.php'; ?>
 
 <?php
+	$show_info = !have_errors();
+
 	require 'util/messages.php';
 
-	if (!have_errors()) {
+	if ($show_info) {
 ?>
 
 <?php require 'util/orderinfo.php'; ?>

@@ -15,7 +15,6 @@
   <graph edgedefault="directed" id="G">
     <data key="d7"/>
     <node id="n0">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="143.0" width="148.0" x="355.0" y="172.125"/>
@@ -42,21 +41,19 @@ deleted : bool<y:LabelModel>
       </data>
     </node>
     <node id="n1">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
-          <y:Geometry height="214.0" width="209.0" x="66.0" y="-3.5"/>
+          <y:Geometry height="196.0" width="209.0" x="66.0" y="-3.5"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#FFFFFF" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="20.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="101.716796875" x="53.6416015625" y="4.0">customer_order</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="171.625" modelName="custom" textColor="#000000" visible="true" width="196.427734375" x="2.0" y="32.96875">&lt;&lt;id&gt;&gt; id : varchar
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="157.65625" modelName="custom" textColor="#000000" visible="true" width="196.427734375" x="2.0" y="32.96875">&lt;&lt;id&gt;&gt; id : varchar
 price : decimal(8,2)
 name : varchar
 address : varchar
 contact : varchar
 when_to_deliver : varchar
 additional_info : varchar
-confirmed : bool
 when_delivered : timestamp
 price_on_delivery : decimal(8,2)
 notes : varchar
@@ -74,7 +71,6 @@ prevent : bool<y:LabelModel>
       </data>
     </node>
     <node id="n2">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="118.0" width="171.0" x="343.5" y="-3.5"/>
@@ -99,7 +95,6 @@ count : int<y:LabelModel>
       </data>
     </node>
     <node id="n3">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="100.0" width="148.0" x="583.0" y="-3.5"/>
@@ -123,10 +118,9 @@ price : decimal(8,2)<y:LabelModel>
       </data>
     </node>
     <node id="n4">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
-          <y:Geometry height="77.0" width="198.0" x="71.5" y="270.0"/>
+          <y:Geometry height="77.0" width="198.0" x="71.5" y="238.125"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#FFFFFF" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="20.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="119.55859375" x="39.220703125" y="4.0">management_user</y:NodeLabel>
@@ -145,10 +139,9 @@ password_hash : varchar<y:LabelModel>
       </data>
     </node>
     <edge id="e0" source="n2" target="n1">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="7.289374999999836" ty="-48.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="7.289374999999836" ty="-43.96261682242992"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:BendStyle smoothed="false"/>
@@ -156,7 +149,6 @@ password_hash : varchar<y:LabelModel>
       </data>
     </edge>
     <edge id="e1" source="n3" target="n2">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.03937499999983629" ty="-9.0"/>
@@ -167,7 +159,6 @@ password_hash : varchar<y:LabelModel>
       </data>
     </edge>
     <edge id="e2" source="n2" target="n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.5" sy="-12.5" tx="0.0" ty="0.0"/>
@@ -178,7 +169,6 @@ password_hash : varchar<y:LabelModel>
       </data>
     </edge>
     <edge id="e3" source="n3" target="n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">

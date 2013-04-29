@@ -16,7 +16,6 @@ CREATE TABLE customer_order (
     contact           varchar NOT NULL,
     when_to_deliver   timestamp NOT NULL,
     additional_info   varchar,
-    confirmed         bool NOT NULL DEFAULT false,
     when_delivered    timestamp,
     price_on_delivery decimal(8,2),
     notes             varchar,
@@ -50,3 +49,4 @@ CREATE TABLE management_user (
 INSERT INTO management_user (username, password_hash) VALUES
 	('admin', '$2a$10$iZT9lHMlMzje89jClrCTdOpJgFJMxSz6AuuGX/XDI9iQjD1kc/2Uq')
 ;
+
