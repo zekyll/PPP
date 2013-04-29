@@ -14,21 +14,23 @@
 		$product->type = $_POST['type'];
 		$product->price = str_replace(',', '.', $_POST["price"]);
 		$product->description = $_POST['description'];
-		if ($_FILES['image']['error'] > 0) {
-			$product->image_name = NULL;
-			add_error('Kuvatiedoston siirrossa tapahtui virhe.');
-		} if ($_FILES['image']['size'] > 102400) {
-			$product->image_name = NULL;
-			add_error('Kuvatiedoston koko voi olla enintään 100 KiB.');
-		} else {
-			$ext = strtolower(end(explode('.', $_FILES["image"]["name"])));
-			if ($ext != 'jpg' && $ext != 'jpeg' && $ext != 'bmp'
-					&& $ext != 'gif' && $ext != 'png') {
-				add_error('Kuvatiedoston tyyppi tulee olla JPG, BMP, GIF tai PNG.');
+		if (strlen($_FILES['image']['name']) != 0) {
+			if ($_FILES['image']['error'] > 0) {
+				$product->image_name = NULL;
+				add_error('Kuvatiedoston siirrossa tapahtui virhe.');
+			} else if ($_FILES['image']['size'] > 102400) {
+				$product->image_name = NULL;
+				add_error('Kuvatiedoston koko voi olla enintään 100 KiB.');
 			} else {
-				$product->image_name = generateRandomId(16) . '.' . $ext;
-				move_uploaded_file($_FILES['image']['tmp_name'],
-						'../images/products/' . $product->image_name);
+				$ext = strtolower(end(explode('.', $_FILES["image"]["name"])));
+				if ($ext != 'jpg' && $ext != 'jpeg' && $ext != 'bmp'
+						&& $ext != 'gif' && $ext != 'png') {
+					add_error('Kuvatiedoston tyyppi tulee olla JPG, BMP, GIF tai PNG.');
+				} else {
+					$product->image_name = generateRandomId(16) . '.' . $ext;
+					move_uploaded_file($_FILES['image']['tmp_name'],
+							'../images/products/' . $product->image_name);
+				}
 			}
 		}
 
