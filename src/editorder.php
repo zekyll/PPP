@@ -35,6 +35,14 @@
 		}
 		$order->additional_info = $_POST['additional_info'];
 
+		if (array_key_exists('update', $_POST)) {
+			$dt = $queries->select_order($id)->when_to_deliver;
+			if ($dt < new DateTime("+1 hour")) {
+				add_error('Tilausta ei voi enää muokata.');
+			}
+		}
+
+		// Tilauksen sisältö.
 		$order->items = array();
 		for($i = 0; $i < $MAX_ORDER_ITEMS; ++$i) {
 			if (empty($_POST['product' . $i]))
@@ -80,11 +88,20 @@
 			}
 		}
 	} elseif (array_key_exists('delete', $_POST)) {
-		$queries->delete_order($id);
-		if(!have_errors()) {
-			add_msg('Tilaus poistettu');
-			redirect('products.php');
+		$dt = $queries->select_order($id)->when_to_deliver;
+		if ($dt < new DateTime("+1 hour")) {
+			add_error('Tilausta ei voi enää poistaa.');
 		}
+
+		if (!have_errors()) {
+			$queries->delete_order($id);
+			if(!have_errors()) {
+				add_msg('Tilaus poistettu');
+				redirect('products.php');
+			}
+		}
+		if (have_errors())
+			$order = $queries->select_order($id);
 	} else {
 		if ($id && $order == NULL) {
 			$order = $queries->select_order($id);

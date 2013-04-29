@@ -10,6 +10,8 @@
 <?php
 	require_once 'util/queries.php';
 
+	require 'util/messages.php';
+
 	// Haetaan tuoteryhmien nimet tietokannasta.
 	$types = $queries->select_types();
 

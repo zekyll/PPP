@@ -9,6 +9,8 @@
 
 <?php $title = 'Tilaukset'; require 'top.php'; ?>
 
+<?php require dirname(__file__) . '/../util/messages.php'; ?>
+
 <table border="1">
 <tr>
 <th>Tunnus</th>

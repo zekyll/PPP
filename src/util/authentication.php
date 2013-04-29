@@ -1,6 +1,6 @@
 <?php
 /*
- * Apufunktioita käyttäjän tunnistautumista varten.
+ * Apufunktiot käyttäjän tunnistautumista ja salasanan hashausta varten.
  */
 
 require_once 'queries.php';

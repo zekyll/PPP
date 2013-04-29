@@ -1,6 +1,7 @@
 <?php
 	/*
-	 * Tulostaa virhe ym. viestit.
+	 * Templaatti sessioon tallennettujen virheilmoitusten ym. viestien
+	 * näyttämiseksi.
 	 */
 ?>
 
